@@ -97,6 +97,7 @@ h1 {
 }
 
 .excel {
+  top: 0;
   background: url("img/excel.jpg");
   background-size: 180%;
 }
@@ -106,6 +107,7 @@ h1 {
 }
 
 .neo {
+  top: 0;
   background: url("img/neo.jpg");
   background-size: 80%;
 }
