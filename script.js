@@ -1,7 +1,7 @@
 const holes = document.querySelectorAll('.hole');
 const scoreBoard = document.querySelector('.score');
 const targets = document.querySelectorAll('.target');
-let lastHole;
+let lastHole = 10;
 let timeUp = false;
 let score = 0;
 let showing = 'none'
@@ -15,7 +15,6 @@ function randomHole(holes) {
     if (idx === lastHole) {
         return randomHole(holes);
     }
-    this.lastHole = idx;
     return idx;
 }
 
@@ -26,7 +25,6 @@ function randomPeeper(hole, target) {
         target.classList.add('neo');
         showing = 'neo';
     } else {
-        // hole.classList.add('up');
         target.classList.add('excel');
         showing = 'excel';
     }
@@ -39,17 +37,14 @@ function antiPeep(decider, hole, target) {
         target.classList.remove('neo');
     } else {
         target.classList.remove('excel');
-        // hole.classList.remove('up', 'excel');
     }
 }
 
 function peep() {
-    const time = randomTime(400, 1000); 
-    const id = 3;// randomHole(holes);
-    const hole = holes[id];
-    console.log(hole);
-    console.log(lastHole);
-    const target = targets[id];
+    const time = randomTime(1000, 1001); 
+    lastHole = randomHole(holes);
+    const hole = holes[lastHole];
+    const target = targets[lastHole];
     const decider = randomPeeper(hole, target);
     setTimeout(() => {
         antiPeep(decider, hole, target);
@@ -62,16 +57,14 @@ function startGame() {
     timeUp = false;
     score = 0;
     peep();
-    setTimeout(() => timeUp = true, 10000);
-    showing = 'none';
+    setTimeout(() => timeUp = true, 100000);
+    
 }
 
 // Catch hit
 function bonk(e) {
     let targetVal = e.target.classList[1];
     let hitId = targetVal.substring(6);
-    console.log(hitId);
-    console.log(lastHole);
     if (hitId == lastHole) {
         if (!e.isTrusted) {
             console.log('CHEATER!'); 
@@ -92,6 +85,7 @@ function bonk(e) {
     } else {
         score--;
     }
+    showing = 'none';
     scoreBoard.textContent = score;
 }
 
