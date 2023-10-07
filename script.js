@@ -57,8 +57,19 @@ function startGame() {
     timeUp = false;
     score = 0;
     peep();
-    setTimeout(() => timeUp = true, 100000);
-    
+    setTimeout(() => timeUp = true, 30000);
+}
+
+function startTimer() {
+    var initTime = 30;
+    var timeleft = initTime;
+    var downloadTimer = setInterval(function(){
+    if(timeleft <= 0){
+        clearInterval(downloadTimer);
+    }
+    document.getElementById("countdown").value = initTime - timeleft;
+    timeleft -= 1;
+    }, 1000);
 }
 
 // Catch hit

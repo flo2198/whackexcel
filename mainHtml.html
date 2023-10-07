@@ -10,9 +10,16 @@
     <title>Whack an Excel</title>
 </head>
 <body>
-    <h1>Whack-an-Excel! <span class="score">0</span></h1>
+    <div style="font-size: 60px; text-align: center;">Whack-an-Excel</div>
     <div class="controls">
-        <button id= "startButton" onClick="startGame()">Start!</button>
+        <div style="display: flex; justify-content: center;"><button id= "startButton" onClick="startGame();startTimer()">Start!</button></div>
+        
+        <div><progress value="0" max="30" id="countdown"></progress></span></div>
+        <!-- <span class="countdown" style="font-size: 50px;">00:00</span> -->
+        <h1>Your Score: <span class="score">0</span></h1>
+        
+        <span>
+        </span>
     </div>
     <div class="game">
         <div class="hole hole0">
