@@ -1,7 +1,7 @@
 Package: whackexcel
 Type: Package
 Title: Whack a mole for excel
-Version: 0.1.1
+Version: 0.2.1
 Author: Florian Kaiser 
 Description: Browser game inspired by Whack-A-Mole but for Excel-Files
 Encoding: UTF-8
