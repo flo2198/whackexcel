@@ -1,6 +1,8 @@
 const holes = document.querySelectorAll('.hole');
 const scoreBoard = document.querySelector('.score');
 const targets = document.querySelectorAll('.target');
+var switchBorP = document.getElementById("buttonprogress");
+
 let lastHole = 10;
 let timeUp = false;
 let score = 0;
@@ -61,6 +63,9 @@ function startGame() {
 }
 
 function startTimer() {
+    console.log('hello');
+    console.log(switchBorP);
+    switchBorP.innerHTML = '<progress value="0" max="30" id="countdown"></progress>';
     var initTime = 30;
     var timeleft = initTime;
     var downloadTimer = setInterval(function(){
@@ -70,6 +75,7 @@ function startTimer() {
     document.getElementById("countdown").value = initTime - timeleft;
     timeleft -= 1;
     }, 1000);
+    switchBorP.innerHTML = '<button id= "startButton" onClick="startGame();startTimer()">Start!</button>';
 }
 
 // Catch hit
