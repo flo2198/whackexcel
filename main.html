@@ -10,15 +10,20 @@
 <body>
     <div class="controls">
         <span>Whack-an-Excel</span>
-        <span id="myButton">
-            <button id= "startButton" onClick="startGame();startTimer()">Start!</button>
+        <span id="buttonorprogress">
+            <span id="myButton">
+                <button id= "startButton" onClick="init()">Start!</button>
+            </span>
         </span>
+        <!--
+            <span id="myProgress">
+            </span>
+
+        -->
         <span>Your Score:
             <span class="score">0</span>
         </span>
     </div>
-    <span id="myProgress">
-    </span>
     
     <div style="padding: 2%;"> </div>
     <div class="midpart">
