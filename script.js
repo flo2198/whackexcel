@@ -3,6 +3,7 @@ const scoreBoard = document.querySelector('.score');
 const targets = document.querySelectorAll('.target');
 const switchButton = document.getElementById("myButton");
 const switchProgress = document.getElementById("myProgress");
+const butorpro = document.getElementById("buttonorprogress");
 
 let lastHole = 10;
 let timeUp = false;
@@ -55,6 +56,16 @@ function peep() {
     }, time);
 }
 
+function init() {
+    wait();
+    startTimer();
+    startGame();
+}
+
+async function wait() {
+    await new Promise(r => setTimeout(r, 2000));
+}
+
 function startGame() {
     scoreBoard.textContent = 0;
     timeUp = false;
@@ -64,19 +75,16 @@ function startGame() {
 }
 
 function startTimer() {
-    switchButton.innerHTML = '';
-    switchProgress.insertAdjacentHTML('afterbegin', '<progress value="0" max="30" id="countdown"></progress>');
+    butorpro.innerHTML = '<progress value="0" max="30" id="countdown"></progress>';
     countDown = document.getElementById("countdown");
-    var initTime = 30;
-    var timeleft = initTime;
+    var timeVal = 0;
     var downloadTimer = setInterval(function(){
-        if(timeleft <= 0){
-            switchButton.innerHTML = '<button id= "startButton" onClick="startGame();startTimer()">Start!</button>';
-            switchProgress.innerHTML = '';
+        if(timeVal >= 30){
+            butorpro.innerHTML = '<span id="myButton"><button id= "startButton" onClick="startGame();startTimer()">Start!</button></span>';
             clearInterval(downloadTimer);
         }
-        countDown.value = initTime - timeleft;
-        timeleft -= 1;
+        countDown.value = timeVal;
+        timeVal++;
     }, 1000);
 }
 
