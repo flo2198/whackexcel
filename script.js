@@ -1,7 +1,8 @@
 const holes = document.querySelectorAll('.hole');
 const scoreBoard = document.querySelector('.score');
 const targets = document.querySelectorAll('.target');
-var switchBorP = document.getElementById("buttonprogress");
+const switchButton = document.getElementById("myButton");
+const switchProgress = document.getElementById("myProgress");
 
 let lastHole = 10;
 let timeUp = false;
@@ -43,7 +44,7 @@ function antiPeep(decider, hole, target) {
 }
 
 function peep() {
-    const time = randomTime(1000, 1001); 
+    const time = randomTime(400, 1000); 
     lastHole = randomHole(holes);
     const hole = holes[lastHole];
     const target = targets[lastHole];
@@ -63,19 +64,20 @@ function startGame() {
 }
 
 function startTimer() {
-    console.log('hello');
-    console.log(switchBorP);
-    switchBorP.innerHTML = '<progress value="0" max="30" id="countdown"></progress>';
+    switchButton.innerHTML = '';
+    switchProgress.insertAdjacentHTML('afterbegin', '<progress value="0" max="30" id="countdown"></progress>');
+    countDown = document.getElementById("countdown");
     var initTime = 30;
     var timeleft = initTime;
     var downloadTimer = setInterval(function(){
-    if(timeleft <= 0){
-        clearInterval(downloadTimer);
-    }
-    document.getElementById("countdown").value = initTime - timeleft;
-    timeleft -= 1;
+        if(timeleft <= 0){
+            switchButton.innerHTML = '<button id= "startButton" onClick="startGame();startTimer()">Start!</button>';
+            switchProgress.innerHTML = '';
+            clearInterval(downloadTimer);
+        }
+        countDown.value = initTime - timeleft;
+        timeleft -= 1;
     }, 1000);
-    switchBorP.innerHTML = '<button id= "startButton" onClick="startGame();startTimer()">Start!</button>';
 }
 
 // Catch hit
@@ -95,12 +97,12 @@ function bonk(e) {
         else if (showing == 'neo') {
             this.parentNode.children[0].classList.remove('neo');
             this.parentNode.classList.remove('up');
-            score--;
+            score = score - 2;
         }
     } else if (showing == 'none') {
         return;
     } else {
-        score--;
+        return;
     }
     showing = 'none';
     scoreBoard.textContent = score;
