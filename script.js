@@ -1,14 +1,14 @@
 const holes = document.querySelectorAll('.hole');
-const scoreBoard = document.querySelector('.score');
+const titleOrHelp = document.getElementById('titleOrHelp');
+// const scoreBoard = document.querySelector('.score');
 const targets = document.querySelectorAll('.target');
-const switchButton = document.getElementById("myButton");
-const switchProgress = document.getElementById("myProgress");
 const butorpro = document.getElementById("buttonorprogress");
 
 let lastHole = 10;
 let timeUp = false;
 let score = 0;
 let showing = 'none'
+let injected = false;
 
 function randomTime(min, max) {
     return Math.round(Math.random() * (max - min) + min);
@@ -57,6 +57,9 @@ function peep() {
 }
 
 function init() {
+    inject();
+    const localScore = document.getElementById('score');
+    scoreBoard = localScore;
     wait();
     startTimer();
     startGame();
@@ -80,7 +83,7 @@ function startTimer() {
     var timeVal = 0;
     var downloadTimer = setInterval(function(){
         if(timeVal >= 30){
-            butorpro.innerHTML = '<span id="myButton"><button id= "startButton" onClick="startGame();startTimer()">Start!</button></span>';
+            butorpro.innerHTML = '<span id="myButton"><button id= "topButton" onClick="startGame();startTimer()">Start!</button></span>';
             clearInterval(downloadTimer);
         }
         countDown.value = timeVal;
@@ -114,6 +117,27 @@ function bonk(e) {
     }
     showing = 'none';
     scoreBoard.textContent = score;
+}
+
+function showHelp () {
+    document.getElementById("overlay").style.display = "block";
+}
+
+function hideHelp () {
+    document.getElementById("overlay").style.display = "none";
+}
+
+function inject () {
+    if (! injected) {
+        titleOrScore.innerHTML = 'Whack-An-Excel!';
+        injected = true;
+    }
+    else {
+        titleOrScore.innerHTML = 'Your Score:<span id="score">0</span>';
+        injected = false;
+    }
+    
+    
 }
 
 targets.forEach(target => target.addEventListener('click', bonk));
