@@ -1,67 +1,94 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
-    <title>Whack an Excel</title>
-</head>
-<body>
-    <div class="controls">
-        <span>Whack-an-Excel</span>
-        <span id="buttonorprogress">
-            <span id="myButton">
-                <button id= "startButton" onClick="init()">Start!</button>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <title>Whack an Excel</title>
+        <link rel="icon" type="image/gif" href="img/hammerexcel_small.gif" />
+    </head>
+    <body onload="inject()" oncontextmenu="return false;">
+        <div class="controls">
+            <span id="titleOrScore">
+                
             </span>
-        </span>
-        <!--
-            <span id="myProgress">
+            <span id="buttonorprogress">
+                <span id="myButton">
+                    <button id= "topButton" onclick="init()">Start!</button>
+                </span>
             </span>
-
-        -->
-        <span>Your Score:
-            <span class="score">0</span>
-        </span>
-    </div>
+            <span>
+                    <button id="topButton" onclick="showHelp()">Help!</button>
+            </span>
+        </div>
     
+    <div id="overlay" onclick="hideHelp()">
+        <div id="overlaytext">
+            <div">
+                <div style="display: block;">
+                    <div class="howto" style="font-size: 36px; text-decoration:underline;">How to Play:</div>
+                    <div class="howto">Press Start and don't let the outdated Excel lists excape from the tentacles. <br>
+                        But be careful, there are some friends around that you do not want to hit with the hammer, but instead help them escape the tentacle!
+                    </div>
+                    <div class="howto" style="font-size: 36px; text-decoration:underline;">Controls:</div>
+                    <div class="howto">Hit the Excel-list with a left-click.<br>
+                        Hit your friend with a right-click!</div>
+                    </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <div>
+                        <img src="img/hammerexcel.gif" alt="Hammer Excel" width="500">
+                    </div>
+                    <div>
+                        <img src="https://i.giphy.com/media/eIm624c8nnNbiG0V3g/giphy.webp" alt="Love Neo" width="690">
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div style="padding: 2%;"> </div>
     <div class="midpart">
         <div class="game">
-            <div class="hole hole0">
-                <div class="target target0"></div>
+            <div class="outerhole">
+                <div class="hole hole0">
+                    <div class="target target0"></div>
+                </div>
+                <div class="afterhole"></div>
             </div>
-            <div class="hole hole1">
-                <div class="target target1"></div>
+            <div class="outerhole">
+                <div class="hole hole1">
+                    <div class="target target1"></div>
+                </div>
+                <div class="afterhole"></div>
             </div>
-            <div class="hole hole2">
-                <div class="target target2"></div>
+            <div class="outerhole">
+                <div class="hole hole2">
+                    <div class="target target2"></div>
+                </div>
+                <div class="afterhole"></div>
             </div>
-            <div class="hole hole3">
-                <div class="target target3"></div>
+            <div class="outerhole">
+                <div class="hole hole3">
+                    <div class="target target3"></div>
+                </div>
+                <div class="afterhole"></div>
             </div>
-            <div class="hole hole4">
-                <div class="target target4"></div>
+            <div class="outerhole">
+                <div class="hole hole4">
+                    <div class="target target4"></div>
+                </div>
+                <div class="afterhole"></div>
             </div>
-            <div class="hole hole5">
-                <div class="target target5"></div>
+            <div class="outerhole">
+                <div class="hole hole5">
+                    <div class="target target5"></div>
+                </div>
+                <div class="afterhole"></div>
             </div>
         </div>
     </div>
     <div style="padding: 5%;"> </div>
-    <div style="display: flex; justify-content: space-between;">
-        <div>
-            <img src="img/hammerexcel.gif" alt="Hammer Excel" width="500">
-        </div>
-        <div style="display: block;">
-            <div class="howto" style="font-size: 18px; text-decoration:underline;">How to Play:</div>
-            <div class="howto" style="font-size: 14px;">Press start and hammer the Excel lists back into their holes by clicking on them. <br>But be careful, there are some friends around that you do not want to hit with the hammer!</div>
-        </div>
-        <div>
-            <img src="https://i.giphy.com/media/eIm624c8nnNbiG0V3g/giphy.webp" alt="Love Neo">
-        </div>
-        
-    </div>
     <script src="script.js"></script>
 </body>
 </html>

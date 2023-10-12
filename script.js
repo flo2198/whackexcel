@@ -1,14 +1,14 @@
 const holes = document.querySelectorAll('.hole');
-const scoreBoard = document.querySelector('.score');
+const titleOrHelp = document.getElementById('titleOrHelp');
+// const scoreBoard = document.querySelector('.score');
 const targets = document.querySelectorAll('.target');
-const switchButton = document.getElementById("myButton");
-const switchProgress = document.getElementById("myProgress");
 const butorpro = document.getElementById("buttonorprogress");
 
 let lastHole = 10;
 let timeUp = false;
 let score = 0;
 let showing = 'none'
+let injected = false;
 
 function randomTime(min, max) {
     return Math.round(Math.random() * (max - min) + min);
@@ -56,14 +56,17 @@ function peep() {
     }, time);
 }
 
-function init() {
-    wait();
+async function init() {
+    inject();
+    const localScore = document.getElementById('score');
+    scoreBoard = localScore;
+    await wait();
     startTimer();
     startGame();
 }
 
 async function wait() {
-    await new Promise(r => setTimeout(r, 2000));
+    return new Promise(r => setTimeout(r, 1000));
 }
 
 function startGame() {
@@ -80,7 +83,7 @@ function startTimer() {
     var timeVal = 0;
     var downloadTimer = setInterval(function(){
         if(timeVal >= 30){
-            butorpro.innerHTML = '<span id="myButton"><button id= "startButton" onClick="startGame();startTimer()">Start!</button></span>';
+            butorpro.innerHTML = '<span id="myButton"><button id= "topButton" onClick="startGame();startTimer()">Start!</button></span>';
             clearInterval(downloadTimer);
         }
         countDown.value = timeVal;
@@ -88,24 +91,51 @@ function startTimer() {
     }, 1000);
 }
 
+
+function showHelp () {
+    document.getElementById("overlay").style.display = "block";
+}
+
+function hideHelp () {
+    document.getElementById("overlay").style.display = "none";
+}
+
+function inject () {
+    if (! injected) {
+        titleOrScore.innerHTML = 'Whack-An-Excel!';
+        injected = true;
+    }
+    else {
+        titleOrScore.innerHTML = 'Your Score:<span id="score">0</span>';
+        injected = false;
+    }    
+}
+
 // Catch hit
 function bonk(e) {
     let targetVal = e.target.classList[1];
     let hitId = targetVal.substring(6);
+    let buttonHit = checkButton(e.which, e.button);
     if (hitId == lastHole) {
         if (!e.isTrusted) {
             console.log('CHEATER!'); 
             return; // cheater!
         }
         if (showing == 'excel') {
-            this.parentNode.children[0].classList.remove('excel');
-            this.parentNode.classList.remove('up');
-            score++;
+            if (buttonHit != null) {
+                this.parentNode.children[0].classList.remove('excel');
+                this.parentNode.classList.remove('up');
+                if (buttonHit) score++
+                else score--
+            }
         }
         else if (showing == 'neo') {
-            this.parentNode.children[0].classList.remove('neo');
-            this.parentNode.classList.remove('up');
-            score = score - 2;
+            if (buttonHit != null) {
+                this.parentNode.children[0].classList.remove('neo');
+                this.parentNode.classList.remove('up');
+                if (! buttonHit) score += 2;
+                else score -= 2;
+            }
         }
     } else if (showing == 'none') {
         return;
@@ -116,4 +146,10 @@ function bonk(e) {
     scoreBoard.textContent = score;
 }
 
-targets.forEach(target => target.addEventListener('click', bonk));
+function checkButton (theWhich, theButton) {
+    if (theWhich == 1 || theButton === 0) return true
+    else if (theWhich === 3 || theButton === 2) return false
+    else return null
+}
+
+targets.forEach(target => target.addEventListener('mousedown', bonk));
