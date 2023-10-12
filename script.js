@@ -56,17 +56,17 @@ function peep() {
     }, time);
 }
 
-function init() {
+async function init() {
     inject();
     const localScore = document.getElementById('score');
     scoreBoard = localScore;
-    wait();
+    await wait();
     startTimer();
     startGame();
 }
 
 async function wait() {
-    await new Promise(r => setTimeout(r, 2000));
+    return new Promise(r => setTimeout(r, 1000));
 }
 
 function startGame() {
@@ -91,33 +91,6 @@ function startTimer() {
     }, 1000);
 }
 
-// Catch hit
-function bonk(e) {
-    let targetVal = e.target.classList[1];
-    let hitId = targetVal.substring(6);
-    if (hitId == lastHole) {
-        if (!e.isTrusted) {
-            console.log('CHEATER!'); 
-            return; // cheater!
-        }
-        if (showing == 'excel') {
-            this.parentNode.children[0].classList.remove('excel');
-            this.parentNode.classList.remove('up');
-            score++;
-        }
-        else if (showing == 'neo') {
-            this.parentNode.children[0].classList.remove('neo');
-            this.parentNode.classList.remove('up');
-            score = score - 2;
-        }
-    } else if (showing == 'none') {
-        return;
-    } else {
-        return;
-    }
-    showing = 'none';
-    scoreBoard.textContent = score;
-}
 
 function showHelp () {
     document.getElementById("overlay").style.display = "block";
@@ -135,9 +108,48 @@ function inject () {
     else {
         titleOrScore.innerHTML = 'Your Score:<span id="score">0</span>';
         injected = false;
-    }
-    
-    
+    }    
 }
 
-targets.forEach(target => target.addEventListener('click', bonk));
+// Catch hit
+function bonk(e) {
+    let targetVal = e.target.classList[1];
+    let hitId = targetVal.substring(6);
+    let buttonHit = checkButton(e.which, e.button);
+    if (hitId == lastHole) {
+        if (!e.isTrusted) {
+            console.log('CHEATER!'); 
+            return; // cheater!
+        }
+        if (showing == 'excel') {
+            if (buttonHit != null) {
+                this.parentNode.children[0].classList.remove('excel');
+                this.parentNode.classList.remove('up');
+                if (buttonHit) score++
+                else score--
+            }
+        }
+        else if (showing == 'neo') {
+            if (buttonHit != null) {
+                this.parentNode.children[0].classList.remove('neo');
+                this.parentNode.classList.remove('up');
+                if (! buttonHit) score += 2;
+                else score -= 2;
+            }
+        }
+    } else if (showing == 'none') {
+        return;
+    } else {
+        return;
+    }
+    showing = 'none';
+    scoreBoard.textContent = score;
+}
+
+function checkButton (theWhich, theButton) {
+    if (theWhich == 1 || theButton === 0) return true
+    else if (theWhich === 3 || theButton === 2) return false
+    else return null
+}
+
+targets.forEach(target => target.addEventListener('mousedown', bonk));

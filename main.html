@@ -8,7 +8,7 @@
         <title>Whack an Excel</title>
         <link rel="icon" type="image/gif" href="img/hammerexcel_small.gif" />
     </head>
-    <body onload="inject()">
+    <body onload="inject()" oncontextmenu="return false;">
         <div class="controls">
             <span id="titleOrScore">
                 
@@ -29,8 +29,12 @@
                 <div style="display: block;">
                     <div class="howto" style="font-size: 36px; text-decoration:underline;">How to Play:</div>
                     <div class="howto">Press Start and don't let the outdated Excel lists excape from the tentacles. <br>
-                        But be careful, there are some friends around that you do not want to hit with the hammer!</div>
-                </div>
+                        But be careful, there are some friends around that you do not want to hit with the hammer, but instead help them escape the tentacle!
+                    </div>
+                    <div class="howto" style="font-size: 36px; text-decoration:underline;">Controls:</div>
+                    <div class="howto">Hit the Excel-list with a left-click.<br>
+                        Hit your friend with a right-click!</div>
+                    </div>
                 <div style="display: flex; justify-content: space-between;">
                     <div>
                         <img src="img/hammerexcel.gif" alt="Hammer Excel" width="500">
