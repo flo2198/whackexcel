@@ -6,17 +6,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
         <title>Whack an Excel</title>
-        <link rel="icon" type="image/gif" href="img/hammerexcel_small.gif" />
+        <link rel="icon" type="image/png" href="img/craken.png" />
     </head>
     <body onload="inject()" oncontextmenu="return false;">
         <div class="controls">
-            <span id="titleOrScore">
-                
-            </span>
-            <span id="buttonorprogress">
-                <span id="myButton">
-                    <button id= "topButton" onclick="init()">Start!</button>
+            <div style="display: table-cell; vertical-align: center;">
+                <span>
+                    <img src="img/craken.png" width="50">
                 </span>
+                <span id="titleOrScore">
+                    
+                </span>
+
+            </div>
+            <span id="buttonorprogress">
+                <div>
+                    <span id="myButton">
+                        <button id= "topButton" onclick="init()">Start!</button>
+                    </span>
+                    <span id ="gamemode">
+                        <label for="myGame">Gamemode:</label>
+                        <select name="myGame" id="myGame">
+                        <option value="random">Random</option>
+                        <option value="official">Official</option>
+                        <!-- <option value="opel">Expert</option> -->
+                        </select>
+                    </span>
+                </div>
             </span>
             <span>
                     <button id="topButton" onclick="showHelp()">Help!</button>
@@ -89,6 +105,6 @@
         </div>
     </div>
     <div style="padding: 5%;"> </div>
-    <script src="script.js"></script>
+    <script type="module" src="js/script.js"></script>
 </body>
 </html>

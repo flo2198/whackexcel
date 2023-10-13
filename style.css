@@ -114,6 +114,10 @@ h1 {
   background-size: 60%;
 }
 
+#titleOrScore {
+  
+}
+
 #topButton {
   background: var(--darkgreen);
   margin-top: 10px;
@@ -166,7 +170,6 @@ progress::-webkit-progress-value {
 .midpart {
   display: flex; 
   justify-content: space-between;
-
 }
 
 #overlay {
