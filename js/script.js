@@ -1,5 +1,3 @@
-import { pickNext } from "./simple/Randgame";
-
 const holes = document.querySelectorAll('.hole');
 const titleOrHelp = document.getElementById('titleOrHelp');
 const gameMode = document.getElementById('myGame');
@@ -10,11 +8,11 @@ let lastHole;
 let timeUp = false;
 let score = 0;
 let showing = 'none'
-let injected = false;
+let injected = true;
 
-function randomTime(min, max) {
-    return Math.round(Math.random() * (max - min) + min);
-}
+import * as Experts from './expert/Experts.js';
+import * as Highscore from './official/Highscore.js';
+import * as Randgame from './simple/Randgame.js';
 
 function randomHole(holes) {
     const idx = Math.floor(Math.random() * holes.length);
@@ -59,11 +57,11 @@ function peep() {
     }, time);
 }
 
-async function init() {
+export async function init() {
     inject();
     const localScore = document.getElementById('score');
     scoreBoard = localScore;
-    selectGame();
+    pickNext = selectGame();
     await wait();
     startTimer();
     startGame();
@@ -71,16 +69,21 @@ async function init() {
 
 function selectGame() {
     if (gameMode.value == "random") {
-        import { pickNext } from "./simple/Randgame";
-        return pickNext;
+        picker = Randgame.pickNext;
+        return picker;
     } else if (gameMode.value == "official") {
-        import { pickNext } from "./official/Highscore";
+        picker = Highscore.pickNext;
+        return picker;
     } else if (gameMode.value == "expert") {
-        import { pickNext } from './expert/Experts.js';
+        picker = Experts.pickNext;
+        return picker;
     } else {
-        import { pickNext } from "./simple/Randgame";
+        picker = Randgame.pickNext;
+        return picker;
     }
+    console.log(picker);
 }
+
 
 async function wait() {
     return new Promise(r => setTimeout(r, 1000));
@@ -109,15 +112,15 @@ function startTimer() {
 }
 
 
-function showHelp () {
+export function showHelp () {
     document.getElementById("overlay").style.display = "block";
 }
 
-function hideHelp () {
+export function hideHelp () {
     document.getElementById("overlay").style.display = "none";
 }
 
-function inject () {
+export function inject () {
     if (! injected) {
         titleOrScore.innerHTML = 'Whack-An-Excel!';
         injected = true;
@@ -125,7 +128,7 @@ function inject () {
     else {
         titleOrScore.innerHTML = 'Your Score:<span id="score">0</span>';
         injected = false;
-    }    
+    }
 }
 
 // Catch hit
