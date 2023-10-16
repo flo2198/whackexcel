@@ -10,7 +10,7 @@ function initOfficalGame () {
     init = true;
 }
 
-export function pickHigh () {
+export function pickNext () {
     let arrayLength = trialArray.char.length;
     let randomNum = Math.floor(Math.random() * arrayLength);
     let randomChar = trialArray.char.splice(randomNum, 1)[0];
