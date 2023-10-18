@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en">
     <head>
@@ -14,30 +14,34 @@
                 <span>
                     <img src="css/img/craken.png" width="50">
                 </span>
-                <span id="titleOrScore">
+                <span id="myTitle">
                     Whack-An-Excel!
+                </span>
+                <span id="myScore">
+                    Your Score:<span id="theScore">0</span>
                 </span>
                 
             </div>
-            <span id="buttonorprogress">
-                <div>
-                    <span id="myButton">
-                        <button class="topButton" id= "startButton">Start!</button>
-                    </span>
-                    <span id ="gamemode">
-                        <label for="myGame">Gamemode:</label>
-                        <select name="myGame" id="myGame">
-                        <option value="random">Random</option>
-                        <option value="official">Official</option>
-                        <!-- <option value="opel">Expert</option> -->
+            <div style="display: flex; justify-content: space-evenly;">
+                <span id="myButton">
+                    <button class="topButton" id= "startButton">Start!</button>
+                </span>
+                <span id="myprogress">
+                    <progress value="0" max="30" id="countdown"></progress>
+                </span>
+                <span id ="gamemode">
+                    <label for="myGame">Gamemode:</label>
+                    <select name="myGame" id="myGame">
+                    <option value="random">Random</option>
+                    <option value="official">Official</option>
+                    <!-- <option value="opel">Expert</option> -->
                     </select>
                 </span>
             </div>
-        </span>
-        <span>
-            <button class="topButton" id="helpButton">Help!</button>
-        </span>
-    </div>
+            <span id="myhelp">
+                <button class="topButton" id="helpButton">Help!</button>
+            </span>
+        </div>
     
     <div id="overlay">
         <div id="overlaytext">
