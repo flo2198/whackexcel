@@ -105,7 +105,7 @@ h1 {
 }
 
 .excel {
-  background: url("img/excel.jpg");
+  background: url("img/newexcel.svg");
   background-size: 160%;
 }
 
@@ -118,7 +118,7 @@ h1 {
   
 }
 
-#topButton {
+.topButton {
   background: var(--darkgreen);
   margin-top: 10px;
   margin-bottom: 10px;
