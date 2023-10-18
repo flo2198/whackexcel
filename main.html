@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en">
     <head>
@@ -6,13 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/style.css">
         <title>Whack an Excel</title>
-        <link rel="icon" type="image/png" href="img/craken.png" />
+        <link rel="icon" type="image/png" href="css/img/craken.png" />
     </head>
     <body oncontextmenu="return false;">
         <div class="controls">
             <div style="display: table-cell; vertical-align: center;">
                 <span>
-                    <img src="img/craken.png" width="50">
+                    <img src="css/img/craken.png" width="50">
                 </span>
                 <span id="titleOrScore">
                     Whack-An-Excel!
@@ -22,7 +22,7 @@
             <span id="buttonorprogress">
                 <div>
                     <span id="myButton">
-                        <button id= "topButton" onclick="init()">Start!</button>
+                        <button class="topButton" id= "startButton">Start!</button>
                     </span>
                     <span id ="gamemode">
                         <label for="myGame">Gamemode:</label>
@@ -35,11 +35,11 @@
             </div>
         </span>
         <span>
-            <button id="topButton" onclick="showHelp()">Help!</button>
+            <button class="topButton" id="helpButton">Help!</button>
         </span>
     </div>
     
-    <div id="overlay" onclick="hideHelp()">
+    <div id="overlay">
         <div id="overlaytext">
             <div">
             <div style="display: block;">
@@ -53,7 +53,7 @@
                 </div>
                 <div style="display: flex; justify-content: space-between;">
                     <div>
-                        <img src="img/hammerexcel.gif" alt="Hammer Excel" width="500">
+                        <img src="css/img/hammerexcel.gif" alt="Hammer Excel" width="500">
                     </div>
                     <div>
                         <img src="https://i.giphy.com/media/eIm624c8nnNbiG0V3g/giphy.webp" alt="Love Neo" width="690">
@@ -105,7 +105,7 @@
         </div>
     </div>
     <div style="padding: 5%;"> </div>
-    <script src="./js/script.js" type="module"></script>
-    <!-- <script type="module" src="./js/script.js"></script> -->
+    <!-- <script src="./js/script.js"></script>  -->
+    <script type="module" src="js/script.js"></script>
 </body>
 </html>
