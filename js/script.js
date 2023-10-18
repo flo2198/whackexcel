@@ -3,12 +3,17 @@ const titleOrHelp = document.getElementById('titleOrHelp');
 const gameMode = document.getElementById('myGame');
 const targets = document.querySelectorAll('.target');
 const butorpro = document.getElementById("buttonorprogress");
+const myStart = document.getElementById("startButton");
+const myHelp = document.getElementById("helpButton");
+const noHelp = document.getElementById("overlay");
 
 let lastHole;
 let timeUp = false;
 let score = 0;
 let showing = 'none'
 let injected = true;
+let scoreBoard;
+let pickNext;
 
 import * as Experts from './expert/Experts.js';
 import * as Highscore from './official/Highscore.js';
@@ -57,10 +62,11 @@ function peep() {
     }, time);
 }
 
-export async function init() {
+async function init() {
     inject();
-    const localScore = document.getElementById('score');
-    scoreBoard = localScore;
+    // const localScore = document.getElementById('score');
+    // scoreBoard = localScore;
+    scoreBoard = document.getElementById('score');
     pickNext = selectGame();
     await wait();
     startTimer();
@@ -69,16 +75,16 @@ export async function init() {
 
 function selectGame() {
     if (gameMode.value == "random") {
-        picker = Randgame.pickNext;
+        let picker = Randgame.pickNext;
         return picker;
     } else if (gameMode.value == "official") {
-        picker = Highscore.pickNext;
+        let picker = Highscore.pickNext;
         return picker;
     } else if (gameMode.value == "expert") {
-        picker = Experts.pickNext;
+        let picker = Experts.pickNext;
         return picker;
     } else {
-        picker = Randgame.pickNext;
+        let picker = Randgame.pickNext;
         return picker;
     }
     console.log(picker);
@@ -99,7 +105,7 @@ function startGame() {
 
 function startTimer() {
     butorpro.innerHTML = '<progress value="0" max="30" id="countdown"></progress>';
-    countDown = document.getElementById("countdown");
+    let countDown = document.getElementById("countdown");
     var timeVal = 0;
     var downloadTimer = setInterval(function(){
         if(timeVal >= 30){
@@ -172,4 +178,8 @@ function checkButton (theWhich, theButton) {
     else return null
 }
 
+
+myStart.addEventListener('click', init);
+myHelp.addEventListener('click', showHelp);
+noHelp.addEventListener('click', hideHelp);
 targets.forEach(target => target.addEventListener('mousedown', bonk));
