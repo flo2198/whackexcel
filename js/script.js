@@ -1,19 +1,30 @@
 const holes = document.querySelectorAll('.hole');
-const titleOrHelp = document.getElementById('titleOrHelp');
+
+const myTitle = document.getElementById('myTitle');
+const myScore = document.getElementById('myScore');
+
 const gameMode = document.getElementById('myGame');
 const targets = document.querySelectorAll('.target');
-const butorpro = document.getElementById("buttonorprogress");
+
+const myButtonSpan = document.getElementById('myButton');
 const myStart = document.getElementById("startButton");
+
+const myProgressSpan = document.getElementById("myprogress");
+
 const myHelp = document.getElementById("helpButton");
+const myHelpSpan = document.getElementById("myhelp");
+
 const noHelp = document.getElementById("overlay");
+
+const mySelectorSpan = document.getElementById("gamemode")
 
 let lastHole;
 let timeUp = false;
 let score = 0;
-let showing = 'none'
-let injected = true;
+let showing = 'none';
 let scoreBoard;
 let pickNext;
+let injected = false;
 
 import * as Experts from './expert/Experts.js';
 import * as Highscore from './official/Highscore.js';
@@ -64,9 +75,7 @@ function peep() {
 
 async function init() {
     inject();
-    // const localScore = document.getElementById('score');
-    // scoreBoard = localScore;
-    scoreBoard = document.getElementById('score');
+    scoreBoard = document.getElementById('theScore');
     pickNext = selectGame();
     await wait();
     startTimer();
@@ -104,12 +113,19 @@ function startGame() {
 }
 
 function startTimer() {
-    butorpro.innerHTML = '<progress value="0" max="30" id="countdown"></progress>';
-    let countDown = document.getElementById("countdown");
     var timeVal = 0;
+    myButtonSpan.style.display = "none";
+    myHelpSpan.style.display = "none";
+    myProgressSpan.style.display = "inline-block";
+    mySelectorSpan.style.display = "none";
+    let countDown = document.getElementById("countdown");
+    countDown.value = timeVal;
     var downloadTimer = setInterval(function(){
         if(timeVal >= 30){
-            butorpro.innerHTML = '<span id="myButton"><button id= "topButton" onClick="startGame();startTimer()">Start!</button></span>';
+            myButtonSpan.style.display = "inline-block";
+            myProgressSpan.style.display = "none";
+            myHelpSpan.style.display = "inline-block";
+            mySelectorSpan.style.display = "inline-block";
             clearInterval(downloadTimer);
         }
         countDown.value = timeVal;
@@ -118,22 +134,19 @@ function startTimer() {
 }
 
 
-export function showHelp () {
+function showHelp () {
     document.getElementById("overlay").style.display = "block";
 }
 
-export function hideHelp () {
+function hideHelp () {
     document.getElementById("overlay").style.display = "none";
 }
 
-export function inject () {
+function inject () {
     if (! injected) {
-        titleOrScore.innerHTML = 'Whack-An-Excel!';
+        myTitle.style.display = "none";
+        myScore.style.display = "inline-block";
         injected = true;
-    }
-    else {
-        titleOrScore.innerHTML = 'Your Score:<span id="score">0</span>';
-        injected = false;
     }
 }
 
