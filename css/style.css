@@ -51,7 +51,16 @@ h1 {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#score {
+#myTitle {
+  display: inline-block;
+}
+
+#myScore {
+  display: none;
+  
+}
+
+#theScore {
   padding: 0 3rem;
   line-height: 1;
   border-radius: 1rem;
@@ -114,10 +123,6 @@ h1 {
   background-size: 60%;
 }
 
-#titleOrScore {
-  
-}
-
 .topButton {
   background: var(--darkgreen);
   margin-top: 10px;
@@ -130,6 +135,14 @@ h1 {
   color: var(--white);
   border-radius: 16px;
   border-color: var(--black);
+}
+
+#myButton {
+  display: inline-block;
+}
+
+#myprogress {
+  display: none;
 }
 
 progress {
@@ -181,7 +194,7 @@ progress::-webkit-progress-value {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.9);
   z-index: 2;
   cursor: pointer;
 }
@@ -195,4 +208,8 @@ progress::-webkit-progress-value {
   font-size: 28px;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+#gamemode {
+  display: inline-block;
 }
