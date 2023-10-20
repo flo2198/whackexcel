@@ -16,7 +16,10 @@ const myHelpSpan = document.getElementById("myhelp");
 
 const noHelp = document.getElementById("overlay");
 
-const mySelectorSpan = document.getElementById("gamemode")
+const mySelectorSpan = document.getElementById("gamemode");
+const gameDrop = document.getElementById("myGame");
+const myNameSpan = document.getElementById("namefield");
+const nameVal = document.getElementById("name");
 
 let lastHole;
 let timeUp = false;
@@ -25,6 +28,8 @@ let showing = 'none';
 let scoreBoard;
 let pickNext;
 let injected = false;
+
+let player;
 
 import * as Experts from './expert/Experts.js';
 import * as Highscore from './official/Highscore.js';
@@ -40,22 +45,28 @@ function randomHole(holes) {
 
 function randomPeeper(hole, target, decider) {
     hole.classList.add('up');
-    if (decider) {
+    if (decider == 0) {
+        target.classList.add('excel');
+        showing = 'excel';
+    } else if (decider == 1) {
         target.classList.add('neo');
         showing = 'neo';
     } else {
-        target.classList.add('excel');
-        showing = 'excel';
+        target.classList.add('schalke');
+        showing = 'schalke';
     }
     return decider;
 }
 
 function antiPeep(decider, hole, target) {
     hole.classList.remove('up');
-    if (decider) {
-        target.classList.remove('neo');
-    } else {
+    if (decider == 0) {
         target.classList.remove('excel');
+    } else if (decider == 1) {
+        target.classList.remove('neo');
+    }
+    else {
+        target.classList.remove('schalke');
     }
 }
 
@@ -87,6 +98,7 @@ function selectGame() {
         let picker = Randgame.pickNext;
         return picker;
     } else if (gameMode.value == "official") {
+        player = nameVal.value;
         let picker = Highscore.pickNext;
         return picker;
     } else if (gameMode.value == "expert") {
@@ -96,7 +108,15 @@ function selectGame() {
         let picker = Randgame.pickNext;
         return picker;
     }
-    console.log(picker);
+}
+
+function switchGame() {
+    if (gameMode.value == "official") {
+        myNameSpan.style.display = "inline-block";
+    }
+    else {
+        myNameSpan.style.display = "none";
+    }
 }
 
 
@@ -109,7 +129,7 @@ function startGame() {
     timeUp = false;
     score = 0;
     peep();
-    setTimeout(() => timeUp = true, 30000);
+    setTimeout(() => timeUp = true, 40000);
 }
 
 function startTimer() {
@@ -118,10 +138,11 @@ function startTimer() {
     myHelpSpan.style.display = "none";
     myProgressSpan.style.display = "inline-block";
     mySelectorSpan.style.display = "none";
+    myNameSpan.style.display = "none"
     let countDown = document.getElementById("countdown");
     countDown.value = timeVal;
     var downloadTimer = setInterval(function(){
-        if(timeVal >= 30){
+        if(timeVal >= 40){
             myButtonSpan.style.display = "inline-block";
             myProgressSpan.style.display = "none";
             myHelpSpan.style.display = "inline-block";
@@ -164,7 +185,7 @@ function bonk(e) {
             if (buttonHit != null) {
                 this.parentNode.children[0].classList.remove('excel');
                 this.parentNode.classList.remove('up');
-                if (buttonHit) score++
+                if (buttonHit == 0) score++
                 else score--
             }
         }
@@ -172,8 +193,16 @@ function bonk(e) {
             if (buttonHit != null) {
                 this.parentNode.children[0].classList.remove('neo');
                 this.parentNode.classList.remove('up');
-                if (! buttonHit) score += 2;
+                if (buttonHit == 1) score += 2;
                 else score -= 2;
+            }
+        }
+        else if (showing == 'schalke') {
+            if (buttonHit != null) {
+                this.parentNode.children[0].classList.remove('neo');
+                this.parentNode.classList.remove('up');
+                if (buttonHit == 2) score += 5;
+                else score -= 5;
             }
         }
     } else if (showing == 'none') {
@@ -186,13 +215,15 @@ function bonk(e) {
 }
 
 function checkButton (theWhich, theButton) {
-    if (theWhich == 1 || theButton === 0) return true
-    else if (theWhich === 3 || theButton === 2) return false
+    if (theWhich == 1 || theButton === 0) return 0
+    else if (theWhich === 3 || theButton === 2) return 1
+    else if (theWhich == 2 || theButton == 1) return 2
     else return null
 }
 
 
 myStart.addEventListener('click', init);
+gameDrop.onchange = switchGame;
 myHelp.addEventListener('click', showHelp);
 noHelp.addEventListener('click', hideHelp);
 targets.forEach(target => target.addEventListener('mousedown', bonk));
