@@ -53,6 +53,7 @@ h1 {
 
 #myTitle {
   display: inline-block;
+  padding-bottom: 15px;
 }
 
 #myScore {
@@ -83,11 +84,6 @@ h1 {
 }
 
 .hole {
-  /*
-  flex: 1 0 33.33%;
-  overflow: hidden;
-  position: relative;
-  */
   width: 100%;
   height: 100%;
 }
@@ -104,23 +100,31 @@ h1 {
 
 .hole.up {
     top: 0;
-}
+  }
   
-.target {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transition: all 0.3s;
+  .target {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: all 0.9s;
 }
 
 .excel {
-  background: url("img/newexcel.svg");
-  background-size: 160%;
+  background-image: url("img/excellogo.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .neo {
-  background: url("img/neo.jpg");
-  background-size: 60%;
+  background-image: url("img/craken.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.schalke {
+  background-image: url("img/schalke.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .topButton {
@@ -212,4 +216,32 @@ progress::-webkit-progress-value {
 
 #gamemode {
   display: inline-block;
+  text-align: center;
+  margin-left: 20px;
+  font-size: 32px;
+  padding: 4px;
+}
+
+#myGame {
+  padding: 6px;
+  background-color: var(--darkblue);
+  border-color: var(--white);
+  border-radius: 10px;
+  color: var(--white);
+  
+}
+
+#namefield {
+  display: none;
+  text-align: center;
+  margin-left: 20px; 
+  font-size: 32px;
+  padding: 4px;
+}
+
+#name {
+  padding: 5px;
+  background-color: var(--white);
+  border-color: var(--white);
+  border-radius: 10px;
 }
